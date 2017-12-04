@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="MyAPP" ng-controller="MyCtrl">
+<head>
+	<title>Using-Angular-push-data-through-object</title>
+	<link rel="stylesheet" href="bootstrap.min.css">
+</head>
+<body>
+	<div class="container-fluid" style="margin-top:50px;">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-offset-3 col-md-7">
+					<form>
+					  	<input type="text" name="" placeholder="Firstname" ng-model="data.firstname">
+					  	<input type="text" name="" placeholder="lastname" ng-model="data.lastname">
+					  	<input type="email" name="" placeholder="email" ng-model="data.email">
+					  	<input type="submit" name="" value="submit" ng-click="Add()">
+					</form>
+					<table class="table">
+					    <thead>
+					      <tr>
+					      <th>S.NO</th>
+					        <th>Firstname</th>
+					        <th>Lastname</th>
+					        <th>Email</th>
+					        <th>Action</th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					      <tr ng-repeat="detail in detailes track by $index">
+					      <td>{{ $index ++1 }}</td>
+					        <td>{{ detail.firstname }} </td>
+					        <td>{{ detail.lastname }} </td>
+					        <td>{{ detail.email }}</td>
+					        <td><input type="button" name="" value="Delete" ng-click="RemoveData($index)"></td>
+					      </tr>
+					    </tbody>
+					 </table>
+  
+				</div>
+			</div>
+		</div>
+	</div>
+
+<script src="angular.min.js"></script>
+	<script type="text/javascript">
+		var app = angular.module("MyAPP", []);
+		app.controller("MyCtrl", function($scope){
+	
+			$scope.detailes = [
+				/*{
+					"firstname" : "Rohit",
+					"lastname" : "sharma",
+					"email": "roitsharma@gmail.com"
+				},
+				{
+					"firstname" : "sachin",
+					"lastname" : "ten",
+					"email": "sachin@gmail.com"
+				},*/
+			]
+
+			$scope.Add = function(){
+				$scope.detailes.push($scope.data);
+				$scope.data = null;
+			}
+			$scope.RemoveData = function(obj){
+				console.log("index value", obj);
+				$scope.detailes.splice(obj, 1)
+			}
+		})
+	</script>
+</body>
+</html>
